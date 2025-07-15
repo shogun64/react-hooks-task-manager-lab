@@ -3,16 +3,19 @@ import { TaskContext } from "../context/TaskContext";
 
 function TaskForm() {
   const [taskName, setTaskName] = useState("");
+  const id = useId();
+  const { addTask } = useContext(TaskContext);
 
   function handleSubmit(e) {
     e.preventDefault();
     if (taskName.trim() === "") return;
+    addTask(taskName.trim());
     setTaskName("");
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>New Task:</label>
+      <label htmlFor={id}>New Task:</label>
       <input
         type="text"
         value={taskName}
